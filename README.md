@@ -9,16 +9,11 @@ Cada projeto é independente e aborda um conceito diferente — desde aplicaçõ
 🚀 Como executar
 
 - Clone o repositório
-  git clone https://github.com/filipeasj/mini-projetos-python.git
-  cd mini-projetos-python
-Crie o ambiente virtual
+  git clone https://github.com/filipeasj/mini-projetos-python.git > cd mini-projetos-python
+- Crie o ambiente virtual
   python -m venv venv
-Ative o ambiente
-  Windows
-    venv\Scripts\activate
- Linux / macOS
-    source venv/bin/activate
-    
+- Ative o ambiente
+  "venv\Scripts\activate" (Windows) ou "source venv/bin/activate" (Linux / macOS)
 - Instale as dependências
   pip install -r requirements.txt
   
