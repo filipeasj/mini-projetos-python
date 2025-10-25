@@ -1,86 +1,88 @@
+# São necessários venv e kivy
+
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 
+
 class MainApp(App):
     def build(self):
-        self.operators = ["/", "*", "+", "-"]
-        self.last_was_operator = None
-        self.last_button = None
+        self.operacoes = ["/", "*", "+", "-"]
+        self.ultima_operacao = None
+        self.ultimo_botao = None
 
-        main_layout = BoxLayout(orientation="vertical")
+        layout_principal = BoxLayout(orientation="vertical")
 
         # Campo de texto da solução
-        self.solution = TextInput(
+        self.solucao = TextInput(
             multiline=False,
             readonly=True,
             halign="right",
             font_size=55
         )
-        main_layout.add_widget(self.solution)
+        layout_principal.add_widget(self.solucao)
 
         # Botões da calculadora
-        buttons = [
+        botoes = [
             ["7", "8", "9", "C"],
             ["4", "5", "6", "*"],
             ["1", "2", "3", "-"],
             [".", "0", "/", "+"],
         ]
 
-        for row in buttons:
+        for row in botoes:
             h_layout = BoxLayout()
             for label in row:
-                button = Button(
+                botao = Button(
                     text=label,
                     pos_hint={"center_x": 0.5, "center_y": 0.5},
                 )
-                button.bind(on_press=self.on_button_press)
-                h_layout.add_widget(button)
-            main_layout.add_widget(h_layout)
+                botao.bind(on_press=self.on_botao_press)
+                h_layout.add_widget(botao)
+            layout_principal.add_widget(h_layout)
 
         # Botão de igual
-        equals_button = Button(
+        botao_igual = Button(
             text="=",
             pos_hint={"center_x": 0.5, "center_y": 0.5}
         )
-        equals_button.bind(on_press=self.on_solution)
-        main_layout.add_widget(equals_button)
+        botao_igual.bind(on_press=self.on_solucao)
+        layout_principal.add_widget(botao_igual)
 
-        return main_layout
+        return layout_principal
 
-    def on_button_press(self, instance):
-        """Manipula os cliques nos botões numéricos e operadores"""
-        current = self.solution.text
-        button_text = instance.text
+    def on_botao_press(self, instance):
+        atual = self.solucao.text
+        texto_botao = instance.text
 
-        if button_text == "C":
+        if texto_botao == "C":
             # Limpa a tela
-            self.solution.text = ""
+            self.solucao.text = ""
         else:
             # Impede operadores duplicados ou iniciais
-            if current and (self.last_was_operator and button_text in self.operators):
+            if atual and (self.ultima_operacao and texto_botao in self.operacoes):
                 return
-            elif current == "" and button_text in self.operators:
+            elif atual == "" and texto_botao in self.operacoes:
                 return
             else:
-                new_text = current + button_text
-                self.solution.text = new_text
+                new_text = atual + texto_botao
+                self.solucao.text = new_text
 
         # Atualiza os controles de estado
-        self.last_button = button_text
-        self.last_was_operator = self.last_button in self.operators
+        self.ultimo_botao = texto_botao
+        self.ultima_operacao = self.ultimo_botao in self.operacoes
 
-    def on_solution(self, instance):
-        """Executa o cálculo ao pressionar o '='"""
-        text = self.solution.text
-        if text:
+    def on_solucao(self, instance):
+        texto = self.solucao.text
+        if texto:
             try:
                 # Avalia a expressão e mostra o resultado
-                solution = str(eval(text))
-                self.solution.text = solution
+                solucao = str(eval(texto))
+                self.solucao.text = solucao
             except Exception:
-                self.solution.text = "Erro"
+                self.solucao.text = "Erro"
+
 
 if __name__ == "__main__":
     app = MainApp()
