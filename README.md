@@ -46,7 +46,3 @@ Filipe Alves Sousa Júlio
 📍 Desenvolvedor em formação — apaixonado por tecnologia e aprendizado contínuo.
 🔗 LinkedIn
  (www.linkedin.com/in/filipeasj)
-
-🏁 Licença
-
-Este projeto é distribuído sob a licença MIT — você pode usar, modificar e compartilhar livremente, desde que mantenha os créditos do autor.
